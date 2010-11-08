@@ -1,0 +1,160 @@
+/*
+	Main Schedulr Stylesheet
+*/
+
+body { font-family: "lucida grande",tahoma,verdana,arial,sans-serif; background: #fff; color: #333; padding-bottom: 25px; }
+p {	margin-left:10px; }
+input, select { border:1px solid black;	padding:2px; }
+label { display:block; }
+
+a { color: #3B5998; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1#schedule_title {	margin: 0 0 10px 10px; }
+h1#title { margin: 4px 0 10px 465px; }
+
+.clear { clear:both; }
+
+
+#schedule {	border:1px solid black; width:808px; margin: 0 0 0 200px; }
+
+#day_list .day {
+	background:-moz-linear-gradient(-90deg, lightGray, gray) repeat scroll 0 0 lightBlue;
+	background:-webkit-gradient(linear, left top, left bottom, from(lightGray), to(gray));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3, endColorstr=#808080);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3, endColorstr=#808080)";
+	border-left:1px solid darkGray;
+	border-bottom:1px solid black;	
+	float:left;
+	font-size:10pt;
+	text-align:center;
+	text-transform:uppercase;
+	width:100px;
+	height:20px;
+	padding:10px 0 10px 0;
+}
+#day_list .first { background-color: lightBlue; margin: 0; }
+
+#time_list { width:110px; }
+
+.time_box { height:25px; border-bottom:1px dotted lightGrey; vertical-align: bottom; padding:10px 0 10px 0px; width:808px; }
+.time_box p { width:98px; margin:0; font-size:16px; height:35px; border-bottom:1px solid black; text-align:center; }
+
+.last_time { border-bottom:none; }
+
+.class {
+	position:absolute;
+	height:50px;
+	width:100px;
+	border:1px solid black;
+	font-size:8pt;
+	text-align:center;
+	background-color:white;
+	-moz-border-radius:10% 10% 10% 10%;
+	-webkit-border-radius:5px 5px 5px 5px;	
+}
+
+#footer {
+	text-align:center;
+}
+
+/****
+
+	Add Page Specific Styles
+
+****/
+#loader { position:absolute; background:url('../img/loader.gif') no-repeat; height:300px; 
+	left:400px; top:340px; width:220px; display:none; }
+
+#welcomeWindow p { width: 500px; }
+#welcomeWindow h3 { text-align: center; }
+	
+#setTitleWindow input[type=text] { font-size:18px; height:30px; margin:0 0 0 30px; width:300px; }
+#setTitleWindow input[type=button] { font-size:18px; height:40px; margin:0 0 0 130px; width:100px; }
+#setTitleWindow h3 { text-align:center; }
+
+#addClassWindow { width: 600px; margin: auto 0; }
+#addClassWindow h3 { text-align:center; font-size:30px; }
+#addClassWindow label { font-size:10pt; }
+#addClassWindow #addClassLeft { float:left; margin: 0 40px 0px 131px; }
+#addClassWindow #addClassRight { margin: 0px; }
+#addClassLeft p, #addClassRight p { height:50px; }
+#addClassWindow #addClass { font-size:10pt; margin:4px 0 4px 240px; padding:6px; }
+#addClassWindow .error_msg { display: block; color: red; margin-top:2px}
+	/* Styles for Day buttons on add course window */
+	.day_buttons { width:542px; margin-left: 47px; }
+	.day_buttons li {
+		float:left;
+		background:-moz-linear-gradient(-90deg, lightGray, gray) repeat scroll 0 0 transparent;
+		background:-webkit-gradient(linear, left top, left bottom, from(lightGray), to(gray));
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3, endColorstr=#808080);
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3, endColorstr=#808080)"		
+		list-style:none outside none;
+		padding: 0 10px;
+		border-right: .1em solid darkGray;
+		text-transform:uppercase;
+	}
+	.day_buttons li p { font-size:8pt; margin-left:4px; }
+	.day_buttons li.enabled {
+		background:-moz-linear-gradient(-90deg, black, gray) repeat scroll 0 0 transparent;
+		background:-webkit-gradient(linear, left top, left bottom, color-stop(0, black), color-stop(.2, gray));
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#000000, endColorstr=#808080);
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#000000, endColorstr=#808080)"
+		color:lightGray;
+	}
+	.day_buttons li.enabled p { color:white; }
+	.day_buttons li#monday { -moz-border-radius:20% 0 0 20%; -webkit-border-radius:15px 0px 0px 15px; padding-right:8px; }
+	.day_buttons li#sunday { -moz-border-radius:0% 20% 20% 0%; -webkit-border-radius:0 15px 15px 0; border:none; padding-left:8px; }
+/* Styles for credit info on top of schedule */
+#total_credits { font-weight:bold; }
+p#cred { margin-left:10px; font-size:17px; width: 1000px; }
+#credit_info { float:right; }
+#saveSchedule { font-weight: bold; color: green}
+
+/* Styles for class listing on left side of add page */
+#class_listing {
+	position:absolute;
+	width:192px;
+	height:822px;
+	border:1px solid black;
+	left:3px;
+	overflow: auto;
+}
+
+#class_listing h1 {
+	display:block;
+	background:-moz-linear-gradient(-90deg, lightGray, gray) repeat scroll 0 0 transparent;
+	background:-webkit-gradient(linear, left top, left bottom, from(lightGray), to(gray));
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3, endColorstr=#808080);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#D3D3D3, endColorstr=#808080)"	
+	text-transform:uppercase;	
+	font-size:14px;
+	font-weight:normal;
+	height:20px;
+	padding: 10px 0;
+	text-align:center;
+}
+#class_listing p#enable_info { font-weight: bold; margin-left: 0; text-align: center; display:none }
+.class_item { font-weight:bold; padding: 2px 0 2px 5px; margin: 1px 0 0 0; border:1px solid black; }
+.class_item.enabled { background-color:#0099CC; color:white; }
+.class_item.conflicted { background-color: red;	color:white; }
+.class_item.disabled { background-color:lightGray; }
+.class_item p { margin: 0 5px 4px 3px;}
+.class_item a.delete_class { color:black; font-size:8pt; }
+
+#addCourse { margin: 0 0 20px 0; }
+
+.class p { margin:0; font-size:7.5px; padding-top: 2px; font-weight: bold; }
+
+/****
+	
+	Saved page specific styles
+	
+****/
+#schedule.saved { margin-left: 10px; }
+
+
+ul#social li { float:left; list-style: none; margin-left: 5px; }
+
+#link input { width:350px; }
+#link p { width:800px; }
