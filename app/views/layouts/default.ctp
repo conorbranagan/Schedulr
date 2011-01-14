@@ -9,7 +9,7 @@
 	<?php echo $content_for_layout ?>
 	<div id = "footer">
 		<p>Copyright &copy; 2010 - Schedulr</p>
-		<p>Developed by Conor Branagan | Code hosted on <a href = "https://github.com/squid890/Schedulr">GitHub</a></p>
+		<p>Developed by Conor Branagan | Code hosted on <a href = "https://github.com/conorbranagan/Schedulr">GitHub</a></p>
 	</div>
 </body>
 </html>

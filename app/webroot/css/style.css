@@ -93,6 +93,7 @@ h1#title { margin: 4px 0 10px 465px; }
 		padding: 0 10px;
 		border-right: .1em solid darkGray;
 		text-transform:uppercase;
+		cursor: pointer;
 	}
 	.day_buttons li p { font-size:8pt; margin-left:4px; }
 	.day_buttons li.enabled {
