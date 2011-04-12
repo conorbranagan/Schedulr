@@ -1,7 +1,8 @@
 <?php
 class Course extends AppModel {
 	var $name = 'Course';
-	var $belongsTo = array('Schedule');
+	var $primaryKey = '_id';
+	var $useDbConfig = 'mongo';
 	var $validate = array(
 		'name' => array(
 			'notempty' => array(
@@ -43,7 +44,7 @@ class Course extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
-		'date_string' => array(
+		'day_string' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				//'message' => 'Your custom message here',
@@ -64,8 +65,20 @@ class Course extends AppModel {
 			),
 		)					
 	);
-	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	
+	function schema() {
+		$this->_schema = array(
+				'_id' => array('type' => 'integer', 'primary' => true, 'length' => 40),
+				'name' => array('type' => 'string'),
+				'credits' => array('type' => 'string'),
+				'start_time' => array('type' => 'time'),
+				'end_time' => array('type' => 'time'),
+				'day_string' => array('type' => 'string'),
+				'color' => array('type' => 'string'),
+				'schedule_id' => array('type' => 'integer')
+			);
+		return $this->_schema;
+	}
 }
 ?>

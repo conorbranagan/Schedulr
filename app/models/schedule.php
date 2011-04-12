@@ -1,7 +1,9 @@
 <?php
 class Schedule extends AppModel {
 	var $name = 'Schedule';	
+	var $useDbConfig = 'mongo';
 	var $hasMany = array('Course');
+
 	var $validate = array(
 		'code' => array(
 			'notempty' => array(
@@ -34,7 +36,5 @@ class Schedule extends AppModel {
 			),
 		),		
 	);
-	//The Associations below have been created with all possible keys, those that are not needed can be remove
-
 }
 ?>

@@ -1,33 +1,4 @@
 <?php echo $this->Html->script('add_class')?>
-<style>
-.class.monday {
-	left:302px;
-}
-
-.class.tuesday {
-	left:403px;
-}
-
-.class.wednesday {
-	left:504px;
-}
-
-.class.thursday {
-	left:605px;
-}
-
-.class.friday {
-	left:706px;
-}
-
-.class.saturday {
-	left:807px;
-}
-
-.class.sunday {
-	left:908px;
-}
-</style>
 
 <div id = "loader"></div>
 <div id = "all_content">
@@ -176,6 +147,7 @@ $(document).ready(function() {
 			$color_index = 0;
 			$course_id = 1;
 			foreach($courses as $course) {
+				$course = $course['Course'];
 				// Find the number of minutes in the start/end time
 				$start_hour = date('g', strtotime($course['start_time']));
 				$start_minute = date('i', strtotime($course['start_time']));

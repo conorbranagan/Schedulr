@@ -3,6 +3,7 @@ class SchedulesController extends AppController {
 	var $helpers = array('Form');
 	var $components = array('RequestHandler');
 	var $name = 'Schedules';
+	var $uses = array('Schedule', 'Course');
 
 
 	function add($uid = null) {
@@ -16,12 +17,13 @@ class SchedulesController extends AppController {
 		$this->set('title_for_layout', 'Create A New Schedulr');
 		if($uid != null) {
 			// We are "forking" a schedule - we must load the data from the database first
-			$my_schedule = $this->Schedule->find('first', array('conditions' => array('Schedule.code' => $uid)));
+			$my_schedule = $this->Schedule->find('first', array('conditions' => array('code' => $uid)));
 			if($my_schedule == null) {
 				// redirect to main add page - just to keep things clean.
 			}
+			$courses = $this->Course->find('all', array('conditions' => array('_id' => $my_schedule['Schedule']['_id'])));
 			$this->set('is_fork', true); 
-			$this->set('courses', $my_schedule['Course']);
+			$this->set('courses', $courses);
 		} else {
 			$this->set('is_fork', false);
 		}	
@@ -39,23 +41,27 @@ class SchedulesController extends AppController {
 			$all_courses = array();
 			$title = $this->params['form']['title'];
 			$total_credits = $this->params['form']['total_credits'];
+
+			$schedule_model = array('Schedule' => array('code' => $code, 'title' => $title, 'credits' => $total_credits));
+			$schedule = $this->Schedule->save($schedule_model, array('validate' => true, 'atomic' => true));
+
 			foreach($this->params['form']['classes'] as $class) {
 				$course = json_decode($class);
 				if($course) {
 					$course_model = array();
 					$course_model['name'] = $course->myCourseName;
-					$course_model['credits'] = $course->myCourseCredits;
+					$course_model['credits'] = 3; //$course->myCourseCredits;
 					$course_model['start_time'] = $this->_convertTime($course->myStartTime);
 					$course_model['end_time'] = $this->_convertTime($course->myEndTime);
 					$course_model['day_string'] = $course->myDayString;
 					$course_model['color'] = $course->myColor;
-					$all_courses [] = $course_model;
+					$course_model['schedule_id'] = $this->Schedule->id;
+					$all_courses []['Course'] = $course_model;
 				}
 			}
-			$schedule_model = array('Schedule' => array('code' => $code, 'title' => $title, 'credits' => $total_credits), 
-										'Course' => $all_courses);
-			$schedule = $this->Schedule->saveAll($schedule_model, array('validate' => true, 'atomic' => true));
-			
+						
+			$this->Course->saveAll($all_courses, array('validate' => true));
+						
 			$this->set('response', $code);
 		} else {
 			$this->set('response', "You did something wrong.");
@@ -79,9 +85,10 @@ class SchedulesController extends AppController {
 		}
 		
 		$class_divs = array();
-		foreach($this_schedule['Course'] as $course) {
-			for($i = 0; $i < strlen($course['day_string']); $i++) {
-				$class_divs [] = $this->_generate_class_div($course, substr($course['day_string'], $i, 1), 157);
+		$courses = $this->Course->find('all', array('conditions' => array('schedule_id' => $this_schedule['Schedule']['_id'])));
+		foreach($courses as $course) {
+			for($i = 0; $i < strlen($course['Course']['day_string']); $i++) {
+				$class_divs [] = $this->_generate_class_div($course['Course'], substr($course['Course']['day_string'], $i, 1), 168);
 			}
 		}
 		$this->set('title_for_layout', $this_schedule['Schedule']['title']);		
@@ -96,7 +103,6 @@ class SchedulesController extends AppController {
 	/*
 		Helper Methods
 	*/
-	
 	function _generate_class_div($course, $day, $top_delta) {
 		$TOP_DELTA = $top_delta;
 		$MINUTE_HEIGHT = (45 / 60);

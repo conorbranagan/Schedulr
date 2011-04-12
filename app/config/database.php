@@ -73,6 +73,7 @@
  */
 class DATABASE_CONFIG {
 
+	/*
 	var $default = array(
 		'driver' => 'mysql',
 		'persistent' => false,
@@ -81,5 +82,12 @@ class DATABASE_CONFIG {
 		'password' => 'root',
 		'database' => 'schedulr',
 		'prefix' => ''
+	);*/
+	
+	var $mongo = array(
+		'datasource' => 'mongodb.mongodbSource',
+		'database' => 'schedulr',
+		'host' => 'localhost',
+		'port' => 27017
 	);
 }

@@ -63,6 +63,13 @@ h1#title { margin: 4px 0 10px 465px; }
 	Add Page Specific Styles
 
 ****/
+.class.monday { left:302px; }
+.class.tuesday { left:403px; }
+.class.wednesday { left:504px; }
+.class.thursday { left:605px; }
+.class.friday { left:706px; }
+.class.saturday { left:807px; }
+.class.sunday { left:908px; }
 #loader { position:absolute; background:url('../img/loader.gif') no-repeat; height:300px; 
 	left:400px; top:340px; width:220px; display:none; }
 
